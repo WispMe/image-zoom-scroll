@@ -7,33 +7,88 @@ gsap.registerPlugin(ScrollTrigger);
 
 // Wait for DOM to be ready
 document.addEventListener("DOMContentLoaded", () => {
-  // Define image and trigger pairs
-  const imageConfigs = [
-    { imageId: "#chair-image-1", triggerId: "#scroll-element-1" },
-    { imageId: "#chair-image-2", triggerId: "#scroll-element-2" },
-    { imageId: "#chair-image-3", triggerId: "#scroll-element-3" },
+  // Define image configuration - just add new entries here to add more images
+  const images = [
+    { src: "public/img_chair-1.png", alt: "Chair 1" },
+    { src: "public/img_chair-2.png", alt: "Chair 2" },
+    { src: "public/img_chair-3.png", alt: "Chair 3" },
+    { src: "public/img_chair-4.png", alt: "Chair 4" },
+    { src: "public/img_chair-5.png", alt: "Chair 5" },
+    { src: "public/img_chair-6.png", alt: "Chair 6" },
+    { src: "public/img_chair-7.png", alt: "Chair 7" },
+    { src: "public/img_chair-8.png", alt: "Chair 8" },
   ];
 
-  imageConfigs.forEach(({ imageId, triggerId }) => {
-    const image = document.querySelector(imageId);
-    const trigger = document.querySelector(triggerId);
+  const app = document.getElementById("app");
+  const imageContainer = document.getElementById("image-container");
 
-    if (image && trigger) {
-      // Set initial scale to 0
-      gsap.set(image, { scale: 0 });
+  if (!app || !imageContainer) {
+    console.error("Required elements not found");
+    return;
+  }
 
-      // Animate scale on scroll
-      gsap.to(image, {
-        scale: 1.1,
-        ease: "sine.inOut",
-        scrollTrigger: {
-          markers: true,
-          trigger: trigger,
-          start: "top top",
-          end: "bottom bottom",
-          scrub: true, // Smoothly animates as you scroll
-        },
-      });
+  // Build scroll elements HTML
+  const scrollElementsHTML = images
+    .map(
+      (_, index) => `
+    <div
+      id="scroll-element-${index + 1}"
+      class="${index === 0 ? "h-[2000px]" : "h-[2000px] -mt-[1500px]"}">
+    </div>
+  `
+    )
+    .join("");
+
+  // Build images HTML
+  const imagesHTML = images
+    .map(
+      (imgConfig, index) => `
+    <img
+      id="chair-image-${index + 1}"
+      src="${imgConfig.src}"
+      alt="${imgConfig.alt}"
+      class="w-full h-full object-cover rounded-md absolute left-0 top-0"
+    />
+  `
+    )
+    .join("");
+
+  // Insert scroll elements before image container's parent
+  const imageContainerParent = imageContainer.parentElement;
+  if (imageContainerParent) {
+    imageContainerParent.insertAdjacentHTML("beforebegin", scrollElementsHTML);
+  }
+
+  // Insert images into container
+  imageContainer.innerHTML = imagesHTML;
+
+  // Set up GSAP animations for each image
+  images.forEach((_, index) => {
+    const scrollElement = document.getElementById(
+      `scroll-element-${index + 1}`
+    );
+    const imgElement = document.getElementById(
+      `chair-image-${index + 1}`
+    ) as HTMLImageElement;
+
+    if (!scrollElement || !imgElement) {
+      console.error(`Elements not found for index ${index}`);
+      return;
     }
+
+    // Set initial scale to 0
+    gsap.set(imgElement, { scale: index <= 0 ? 0.1 : 0 });
+
+    // Animate scale on scroll
+    gsap.to(imgElement, {
+      scale: 1.1,
+      ease: "sine.inOut",
+      scrollTrigger: {
+        trigger: scrollElement,
+        start: "top top",
+        end: "bottom bottom",
+        scrub: true, // Smoothly animates as you scroll
+      },
+    });
   });
 });
