@@ -17,6 +17,11 @@ document.addEventListener("DOMContentLoaded", () => {
     { src: "/img_chair-6.png", alt: "Chair 6" },
     { src: "/img_chair-7.png", alt: "Chair 7" },
     { src: "/img_chair-8.png", alt: "Chair 8" },
+    { src: "/img_chair-9.png", alt: "Chair 9" },
+    { src: "/img_chair-10.png", alt: "Chair 10" },
+    { src: "/img_chair-11.png", alt: "Chair 11" },
+    { src: "/img_chair-12.png", alt: "Chair 12" },
+    { src: "/img_chair-13.png", alt: "Chair 13" },
   ];
 
   const app = document.getElementById("app");
