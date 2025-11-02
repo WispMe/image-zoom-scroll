@@ -9,14 +9,14 @@ gsap.registerPlugin(ScrollTrigger);
 document.addEventListener("DOMContentLoaded", () => {
   // Define image configuration - just add new entries here to add more images
   const images = [
-    { src: "public/img_chair-1.png", alt: "Chair 1" },
-    { src: "public/img_chair-2.png", alt: "Chair 2" },
-    { src: "public/img_chair-3.png", alt: "Chair 3" },
-    { src: "public/img_chair-4.png", alt: "Chair 4" },
-    { src: "public/img_chair-5.png", alt: "Chair 5" },
-    { src: "public/img_chair-6.png", alt: "Chair 6" },
-    { src: "public/img_chair-7.png", alt: "Chair 7" },
-    { src: "public/img_chair-8.png", alt: "Chair 8" },
+    { src: "/img_chair-1.png", alt: "Chair 1" },
+    { src: "/img_chair-2.png", alt: "Chair 2" },
+    { src: "/img_chair-3.png", alt: "Chair 3" },
+    { src: "/img_chair-4.png", alt: "Chair 4" },
+    { src: "/img_chair-5.png", alt: "Chair 5" },
+    { src: "/img_chair-6.png", alt: "Chair 6" },
+    { src: "/img_chair-7.png", alt: "Chair 7" },
+    { src: "/img_chair-8.png", alt: "Chair 8" },
   ];
 
   const app = document.getElementById("app");
